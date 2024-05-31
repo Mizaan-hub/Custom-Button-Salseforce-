@@ -1,4 +1,4 @@
-<aura:component controller="PositionController" implements="flexipage:availableForAllPageTypes" access="global">
+<aura:component controller="PositionController" implements="forceCommunity:availableForAllPageTypes"  access="global">
 
     <aura:attribute name="positionId" type="String"/>
     <aura:attribute name="position" type="String"/>
