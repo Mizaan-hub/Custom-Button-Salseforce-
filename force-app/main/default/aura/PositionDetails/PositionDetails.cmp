@@ -10,7 +10,7 @@
 
     <!-- Position Details -->
     <lightning:card  title="Position Details">
-        <p class="slds--var-p-horizontal_small">
+        <p class="slds-var-p-horizontal_small">
             <b>position Name: </b>{!v.position.Name}<br/>
             <b>Location: </b>{!v.position.Location__c}<br/>
         </p>
