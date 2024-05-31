@@ -10,7 +10,7 @@
 
     <!-- Position Details -->
     <lightning:card  title="Position Details">
-        <p class="slds-p-horizontal_small">
+        <p class="slds--var-p-horizontal_small">
             <b>position Name: </b>{!v.position.Name}<br/>
             <b>Location: </b>{!v.position.Location__c}<br/>
         </p>
@@ -19,7 +19,7 @@
     <!-- Job Applications -->
     <lightning:card title="Job Applications">
         <aura:iteration items="{!v.jobApplications}" var="jobApp">
-            <p class="slds-p-horizontal_small">
+            <p class="slds-var-p-horizontal_small">
                 <b>Candidate Id: </b>{!jobApp.Candidate__r.Name}<br/>
                 <b>First Name: </b>{!jobApp.Candidate__r.First_Name__c} {!jobApp.Candidate__r.Last_Name__c}
                 <b>Status: </b>{!jobApp.Status__c}
