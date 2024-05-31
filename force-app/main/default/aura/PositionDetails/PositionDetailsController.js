@@ -1,7 +1,25 @@
 ({
+
+    getUrlParameter : function(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+    
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+    
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
+            }
+        }
+    },
+    
     doInit : function(component, helper) {
+        console.log("hey");
         //Retrieve the positionId from the url parameters
         var pageRef = component.get("v.pageReference");
+        console.log(component.get("v.pageReference").state.testAttribute);
 
         //URL EXAMPLE /lightning/cmp/c__PositionDetails?c__positionId={a00GA000074XhEN}
         // https://aqxolt61-dev-ed.develop.my.salesforce.com/{a00GA000074XhEN}
@@ -16,8 +34,11 @@
         helper.fetchJobApplications(component, positionId);
     },
 
+    
+
     showNewJobApplicationsForm : function(component){
         component.set("v.showNewJobApplicationsForm",true);
+        console.log("hey there");
     },
 
 

@@ -1,12 +1,15 @@
-<aura:component controller="PositionController" implements="forceCommunity:availableForAllPageTypes"  access="global">
+<aura:component controller="PositionController" implements="lightning:isUrlAddressable"  access="global">
 
     <aura:attribute name="positionId" type="String"/>
     <aura:attribute name="position" type="String"/>
     <aura:attribute name="jobApplications" type="List"/>
     <aura:attribute name="newJobApplication" type="Job_Application__c" default="{'sobjectType: 'Job_Application_c'}" />
     <aura:attribute name="showNewJobApplicationForm" type="Boolean" default="false"/>
-    
+
+
+    <aura:handler name="init" value="{!this}" action="{!c.getUrlParameter}"/>
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    {!v.pageReference.state.testAttribute}
 
     <!-- Position Details -->
     <lightning:card  title="Position Details">
