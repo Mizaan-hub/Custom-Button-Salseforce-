@@ -1,0 +1,2 @@
+SELECT Id, Name, Location__c
+  FROM Position__c

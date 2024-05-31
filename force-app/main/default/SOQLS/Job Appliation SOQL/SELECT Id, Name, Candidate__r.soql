@@ -1,0 +1,2 @@
+SELECT Id, Name, Candidate__r.Name,Candidate__r.First_Name__c, Candidate__r.Last_Name__c, Status__c
+  FROM Job_Application__c
