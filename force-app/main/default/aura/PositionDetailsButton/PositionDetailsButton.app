@@ -1,3 +1,48 @@
-<aura:application>
-  <c:PositionDetails/>
+<aura:application controller="PositionController" implements="lightning:isUrlAddressable"  access="global">
+
+    <aura:attribute name="positionId" type="String"/>
+    <aura:attribute name="position" type="String"/>
+    <aura:attribute name="jobApplications" type="List"/>
+    <aura:attribute name="newJobApplication" type="Job_Application__c" default="{'sobjectType: 'Job_Application_c'}" />
+    <aura:attribute name="showNewJobApplicationForm" type="Boolean" default="false"/>
+
+
+    <aura:handler name="init" value="{!this}" action="{!c.getUrlParameter}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    {!v.pageReference.state.testAttribute}
+
+    <!-- Position Details -->
+    <lightning:card  title="Position Details">
+        <p class="slds-var-p-horizontal_small">
+            <b>position Name: </b>{!v.position.Name}<br/>
+            <b>Location: </b>{!v.position.Location__c}<br/>
+        </p>
+    </lightning:card>
+
+    <!-- Job Applications -->
+    <lightning:card title="Job Applications">
+        <aura:iteration items="{!v.jobApplications}" var="jobApp">
+            <p class="slds-var-p-horizontal_small">
+                <b>Candidate Id: </b>{!jobApp.Candidate__r.Name}<br/>
+                <b>First Name: </b>{!jobApp.Candidate__r.First_Name__c} {!jobApp.Candidate__r.Last_Name__c}
+                <b>Status: </b>{!jobApp.Status__c}
+            </p>
+        </aura:iteration>
+    </lightning:card>
+
+    <!-- New Job Application button -->
+    <lightning:button variant="brand" label="New Job Application" onclick="{!c.showJobApplicationForm}"/>
+
+    <!-- New job Application Form -->
+    <aura:if isTrue="{!v.showNewJobApplicationForm}">
+        <lightning:card title="New Job Application">
+            <lightning:recordEditForm objectApiName="Job_Application__c" onsubmit="{!c.handleSubmit}" onerror="{!c.handleError}" onsuccess="{!c.handleSuccess}">
+                <lightning:messages/>
+                <lightning:inputField fieldName="Candidate__c"/>
+                <lightning:inputField fieldName="Status__c"/>
+                <lightning:inputField fieldName="Position__c" value="{!v.position.Id}"/>
+                <lightning:button type="submit" label="save"/>
+            </lightning:recordEditForm>
+        </lightning:card>
+    </aura:if>
 </aura:application>	
