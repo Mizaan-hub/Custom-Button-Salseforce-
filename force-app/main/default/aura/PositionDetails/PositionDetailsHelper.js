@@ -14,7 +14,7 @@
         
             if (state === "SUCCESS") {
                 var position = response.getReturnValue();
-                // set the position details in the compnent
+                // set the position details in the component
                 component.set("v.position", position);
             }
             else{
