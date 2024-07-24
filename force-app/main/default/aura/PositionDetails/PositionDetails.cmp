@@ -3,18 +3,16 @@
     <aura:attribute name="positionId" type="String"/>
     <aura:attribute name="position" type="String"/>
     <aura:attribute name="jobApplications" type="List"/>
-    <aura:attribute name="newJobApplication" type="Job_Application__c" default="{'sobjectType: 'Job_Application_c'}" />
-    <aura:attribute name="showNewJobApplicationForm" type="Boolean" default="false"/>
+    <aura:attribute name="showNewJobApplicationForm" type="Boolean" default="true"/>
 
 
-    <aura:handler name="init" value="{!this}" action="{!c.getUrlParameter}"/>
+    <!--<aura:handler name="init" value="{!this}" action="{!c.getUrlParameter}"/>-->
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
-    {!v.pageReference.state.testAttribute}
 
     <!-- Position Details -->
     <lightning:card  title="Position Details">
         <p class="slds-var-p-horizontal_small">
-            <b>position Name: </b>{!v.position.Name}<br/>
+            <b>Position Name: </b>{!v.position.Name}<br/>
             <b>Location: </b>{!v.position.Location__c}<br/>
         </p>
     </lightning:card>
@@ -28,22 +26,32 @@
                 <b>Status: </b>{!jobApp.Status__c}
             </p>
         </aura:iteration>
+
+
     </lightning:card>
+    
+    <div class = "slds-m-top_x-small">
+        <lightning:button label="Create New Record" onclick="{!c.createRecord}" />
+    </div>
 
-    <!-- New Job Application button -->
-    <lightning:button variant="brand" label="New Job Application" onclick="{!c.showJobApplicationForm}"/>
+    
 
-    <!-- New job Application Form -->
+    <!-- New job Application Form 
     <aura:if isTrue="{!v.showNewJobApplicationForm}">
         <lightning:card title="New Job Application">
-            <lightning:recordEditForm objectApiName="Job_Application__c" onsubmit="{!c.handleSubmit}" onerror="{!c.handleError}" onsuccess="{!c.handleSuccess}">
+            <lightning:recordEditForm class="slds-var-p-horizontal_small" objectApiName="Job_Application__c" onsubmit="{!c.handleSubmit}" onerror="{!c.handleError}" onsuccess="{!c.handleSuccess}">
                 <lightning:messages/>
                 <lightning:inputField fieldName="Candidate__c"/>
                 <lightning:inputField fieldName="Status__c"/>
                 <lightning:inputField fieldName="Position__c" value="{!v.position.Id}"/>
                 <lightning:button type="submit" label="save"/>
             </lightning:recordEditForm>
+    <div class="slds-m-top_x-small">
+        <lightning:button variant="brand" label="New Job Application" onclick="{!c.redirectToCustomObject}"/>
+    </div>
         </lightning:card>
-    </aura:if>
+    </aura:if>-->
     
-</aura:component>	
+    
+    
+</aura:component>

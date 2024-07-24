@@ -16,6 +16,7 @@
                 var position = response.getReturnValue();
                 // set the position details in the component
                 component.set("v.position", position);
+                //$A.enqueueAction(component.get("c.fetchJobApplications"));
             }
             else{
                 console.error("Failed to fetch position details: "+response.getError());
@@ -31,7 +32,7 @@
         var action = component.get("c.getJobApplications");
         // setting position id as a parameter for the action
         action.setParams({
-            "positionId" : component.get("v.position")
+            "positionId" : component.get("v.positionId")
         });
 
         // call back function to handle the responce

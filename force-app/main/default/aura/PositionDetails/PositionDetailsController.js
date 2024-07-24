@@ -15,23 +15,23 @@
         }
     },
     
-    doInit : function(component, helper) {
+    doInit : function(component, event, helper) {
         console.log("hey");
         //Retrieve the positionId from the url parameters
-        var pageRef = component.get("v.pageReference");
-        console.log(component.get("v.pageReference").state.testAttribute);
+        //var pageRef = component.get("v.pageReference");
+        //console.log(component.get("v.pageReference").state.testAttribute);
 
         //URL EXAMPLE /lightning/cmp/c__PositionDetails?c__positionId={a00GA000074XhEN}
         // https://aqxolt61-dev-ed.develop.my.salesforce.com/{a00GA000074XhEN}
 
-        var positionId = pageRef.state.c__positionId;
-        component.set("v.positionId",positionId);
+        //var positionId = pageRef.state.c__positionId;
+        //component.set("v.positionId",positionId);
         
         //Retrieve the position details
         helper.fetchPositionDetails(component);
         
         //Retrieve the job applications
-        helper.fetchJobApplications(component, positionId);
+        helper.fetchJobApplications(component);
     },
 
     
@@ -40,11 +40,34 @@
         component.set("v.showNewJobApplicationsForm",true);
         console.log("hey there");
     },
+    
+     createRecord : function(component, event, helper) {
+		console.log("redirecting")
+        var createRecordEvent = $A.get("e.force:createRecord");
+        createRecordEvent.setParams({
+            "entityApiName": "Job_Application__c"
+        });
+        createRecordEvent.fire();
+    }
+    
+    
+    /*redirectToCustomObject : function(component, event, helper) {
+        console.log("redirecting")
+        var urlEvent = $A.get("e.force:navigateToURL");
+        urlEvent.setParams({
+            "url": "/lightning/o/Job_Application__c/list?filterName=__Recent"
+        });
+        urlEvent.fire();
+    },
+
+
+
 
 
     handleSubmit : function(component, event){
-        // var recordEditForm = component.find("recordEditForm");
-        // recordEditForm.save();
+        console.log("saving")
+        var recordEditForm = component.find("recordEditForm");
+        recordEditForm.save();
         event.preventDefault(); //to prevent from default submit
         var fields = event.getParam('fields');
         fields.Position__c = component.get("v.positionId");
@@ -68,5 +91,5 @@
 
         var errors = event.getParam('error');
         console.error("Error creating a new Job Application: ",errors);
-    }
+    }*/
 })
